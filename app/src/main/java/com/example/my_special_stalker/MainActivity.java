@@ -1,13 +1,18 @@
 package com.example.my_special_stalker;
 
 import android.Manifest;
+
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
@@ -21,16 +26,18 @@ import java.lang.reflect.Type;
 public class MainActivity extends AppCompatActivity {
 
     private static final int PERMISSION_ALL = 123;
+
+
     String[] PERMISSIONS = {
             Manifest.permission.SEND_SMS,
             Manifest.permission.READ_PHONE_STATE,
             Manifest.permission.PROCESS_OUTGOING_CALLS,
 
     };
-
     EditText phone_num;
     EditText message_to_show;
     TextView info_updater_headline;
+
 
     Gson gson = new Gson();
     Info_entered info;
@@ -47,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         loadSP();
+
         //*****************************************************************************************
         //show the sp on the screen:
         message_to_show.setText(info.getMsg_to_send());
@@ -91,8 +99,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
     public static boolean hasPermissions(Context context, String... permissions) {
         if (context != null && permissions != null) {
             for (String permission : permissions) {
@@ -131,8 +137,6 @@ public class MainActivity extends AppCompatActivity {
                     String json = gson.toJson(info, type);
                     intent.putExtra("extra", json);
                     sendBroadcast(intent);
-
-
 
 
             }

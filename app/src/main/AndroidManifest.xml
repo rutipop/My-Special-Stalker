@@ -37,6 +37,28 @@
         </receiver>
 
 
+        <receiver android:name=".MSGsent" >
+            <intent-filter>
+
+                <action android:name="SMS_SENT" />
+
+            </intent-filter>
+        </receiver>
+
+
+        <receiver android:name=".MSGReciver" >
+            <intent-filter>
+
+                <action android:name="SMS_DELIVERED" />
+
+            </intent-filter>
+        </receiver>
+
+
+
+        <service android:name=".MyService"  android:enabled="true"/>
+
+
     </application>
 
 </manifest>
